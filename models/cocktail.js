@@ -2,6 +2,16 @@ import mongoose from "mongoose"
 
 const Schema = mongoose.Schema
 
+const reviewsSchema = new Schema({
+  rating: {type: Number, min: 1, max: 5},
+  profile: { type: Schema.Types.ObjectId, ref: 'Profile', default: null,}
+})
+
+const commentsSchema = new Schema({
+  comment: {type: String},
+  profile: { type: Schema.Types.ObjectId, ref: 'Profile', default: null,}
+})
+
 const cocktailSchema = new Schema({
 
   name: { type: String },
@@ -11,11 +21,11 @@ const cocktailSchema = new Schema({
   servedIn: { type: String, default: "Served In" },
   image: { type: String, default: "Image URL" },
 
-  reviews: [{ type: Schema.Types.ObjectId, ref: 'Review', default: null,}],
+  profile: { type: Schema.Types.ObjectId, ref: 'Profile', default: null,},
 
-  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment', default: null,}],
+review: [reviewsSchema],
 
-  profile: { type: Schema.Types.ObjectId, ref: 'Profile', default: null,}
+comment: [commentsSchema]
 
 },{
   timestamps: true
