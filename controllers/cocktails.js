@@ -1,4 +1,4 @@
-import { Cocktail } from "../models/cocktail";
+import { Cocktail } from "../models/cocktail.js";
 
 function index (req, res) {
     Cocktail.find({})
