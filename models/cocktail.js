@@ -14,7 +14,7 @@ const commentsSchema = new Schema({
 
 const cocktailSchema = new Schema({
 
-  name: { type: String },
+  name: { type: String, required: true},
   ingredients: [String],
   method: { type: String, default: "Method" },
   garnish: { type: String, default: "Garnish" },
