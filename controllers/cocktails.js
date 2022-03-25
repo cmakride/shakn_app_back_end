@@ -11,9 +11,10 @@ function index (req, res) {
 }
 
 function create(req, res) {
+  console.log("CONTROLLERFUNCTION == ",req.body)
     Cocktail.create(req.body)
-    .then(cocktails => {
-        res.json(cocktails)
+    .then(cocktail => {
+        res.json(cocktail)
     })
     .catch(err => {
         res.json(err)
