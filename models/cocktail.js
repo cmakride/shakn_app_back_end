@@ -18,7 +18,7 @@ const cocktailSchema = new Schema({
   ingredients: [String],
   method: { type: String, default: "Method" },
   garnish: { type: String, default: "Garnish" },
-  servedIn: { type: String, default: "Served In" },
+  served_in: { type: String, default: "Served In" },
   image: { type: String, default: "Image URL" },
 
   profile: { type: Schema.Types.ObjectId, ref: 'Profile', default: null,},
