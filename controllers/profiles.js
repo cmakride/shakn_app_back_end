@@ -8,5 +8,13 @@ function index(req, res) {
     res.status(500).json(err)
   })
 }
+function show(req, res){
+  Profile.findById(req.params.id)
+  .then(profile => res.json(profile))
+  .catch(err => res.json(err))
+}
 
-export { index }
+export {
+  index,
+  show
+ }
