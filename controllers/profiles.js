@@ -14,7 +14,14 @@ function show(req, res){
   .catch(err => res.json(err))
 }
 
+function update(req, res){
+  Profile.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .then(profile => res.json(profile))
+  .catch(err => res.json(err))
+}
+
 export {
   index,
-  show
+  show,
+  update
  }
