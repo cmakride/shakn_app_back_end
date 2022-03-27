@@ -11,6 +11,7 @@ function index (req, res) {
 }
 
 function create(req, res) {
+  req.body.profile = req.user.profile
   console.log("CONTROLLERFUNCTION == ",req.body)
     Cocktail.create(req.body)
     .then(cocktail => {
