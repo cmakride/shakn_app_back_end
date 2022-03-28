@@ -10,8 +10,14 @@ function index(req, res) {
 }
 function show(req, res){
   Profile.findById(req.params.id)
-  .then(profile => res.json(profile))
+  .then(profile => {
+    console.log(profile)
+    res.json(profile)})
   .catch(err => res.json(err))
+}
+
+function addCocktail(req,res){
+  console.log(req.body)
 }
 
 function update(req, res){
@@ -23,5 +29,6 @@ function update(req, res){
 export {
   index,
   show,
-  update
+  update,
+  addCocktail
  }
