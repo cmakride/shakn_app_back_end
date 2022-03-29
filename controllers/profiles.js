@@ -16,9 +16,23 @@ function show(req, res){
   .catch(err => res.json(err))
 }
 
-//respond with updated profile
+//!add cocktail to collection for this profile
 function addCocktail(req,res){
-  console.log(req.body)
+  console.log(req.body._id)
+  Profile.findById(req.user.profile)
+  .then(profile =>{
+    profile.favoriteCocktails.push(req.body._id)
+    profile.save()
+    .then(updatedProfile => {
+      res.json(updatedProfile)
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+  //get cocktail id
+  //get profile and add cocktail.id to profile favoriteCocktails then send updated profile
 }
 
 function update(req, res){

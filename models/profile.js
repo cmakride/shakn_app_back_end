@@ -9,7 +9,7 @@ const profileSchema = new mongoose.Schema({
   bio: {type: String},
   bar: {type: String},
   city: {type: String},
-  favoriteCocktail: [{ type: Schema.Types.ObjectId, ref: 'Cocktail', default: null}]
+  favoriteCocktails: [{ type: Schema.Types.ObjectId, ref: 'Cocktail', default: null}]
 },{
     timestamps: true,
 })
