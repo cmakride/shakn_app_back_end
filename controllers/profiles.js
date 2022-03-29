@@ -25,9 +25,6 @@ function addCocktail(req, res) {
     .then(profile => {
       const tempArray = profile.favoriteCocktails
       let exists = false
-      
-      
-      
       tempArray.forEach(id => {
         let tempId = id.toString()
         if (tempId === cocktailId) {
@@ -53,6 +50,40 @@ function addCocktail(req, res) {
     })
 }
 
+function removeCocktail(req,res){
+  const cocktailId = req.body._id
+  console.log(cocktailId)
+  Profile.findById(req.user.profile)
+    .then(profile => {
+      const tempArray = profile.favoriteCocktails
+      let exists = false
+      let targetIdx = null
+      tempArray.forEach((id,idx) => {
+        let tempId = id.toString()
+        if (tempId === cocktailId) {
+          exists = true
+          targetIdx = idx 
+        }
+      })
+        if(exists){
+          profile.favoriteCocktails.splice(targetIdx,1)
+          console.log("DELETED FROM COLLECTION",profile.favoriteCocktails)
+          profile.save()
+          .then(updatedProfile => {
+            res.json(updatedProfile)
+          })
+        }else{
+          console.log("NOT DELETED",profile.favoriteCocktails)
+          res.json(profile)
+        }
+
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json(err)
+    })
+}
+
 function update(req, res) {
   Profile.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then(profile => res.json(profile))
@@ -63,5 +94,6 @@ export {
   index,
   show,
   update,
-  addCocktail
+  addCocktail,
+  removeCocktail
 }
