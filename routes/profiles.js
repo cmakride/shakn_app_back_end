@@ -14,8 +14,10 @@ router.use(decodeUserFromToken)
 router.get('/', checkAuth, profilesCtrl.index)
 router.get('/:id',checkAuth, profilesCtrl.show)
 //!route to add to collection
+router.patch('/editProfile', checkAuth,profilesCtrl.updateProfile)
 router.post('/addCocktail',checkAuth,profilesCtrl.addCocktail)
 router.patch('/removeCocktail',checkAuth,profilesCtrl.removeCocktail)
+
 // router.put('/:id', checkAuth, profilesCtrl.update)
 
 export { router }
