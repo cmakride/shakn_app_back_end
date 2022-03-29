@@ -13,6 +13,7 @@ router.put('/:id', profilesCtrl.update)
 router.use(decodeUserFromToken)
 router.get('/', checkAuth, profilesCtrl.index)
 router.get('/:id',checkAuth, profilesCtrl.show)
+//!route to add to collection
 router.post('/addCocktail',checkAuth,profilesCtrl.addCocktail)
 // router.put('/:id', checkAuth, profilesCtrl.update)
 
