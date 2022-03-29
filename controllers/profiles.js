@@ -16,6 +16,7 @@ function show(req, res){
   .catch(err => res.json(err))
 }
 
+//respond with updated profile
 function addCocktail(req,res){
   console.log(req.body)
 }
