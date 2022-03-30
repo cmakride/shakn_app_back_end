@@ -67,7 +67,18 @@ function update(req, res){
     .catch(err => res.json(err))
 }
 
+function comment(req, res){
+  console.log(req.body, "REQBODY")
+  Cocktail.findById(req.params.id)
+  .then(cocktail => {
+    cocktail.comment.push(req.body)
+    cocktail.save()
+    res.json(cocktail)
+  }).catch(err => res.json(err))
+}
+
 export {
+  comment,
     index,
     create,
     deleteCocktail as delete,
