@@ -2,7 +2,10 @@ import { Cocktail } from "../models/cocktail.js";
 import {v2 as cloudinary} from 'cloudinary'
 
 function index (req, res) {
-    Cocktail.find({})
+    Cocktail.find({}).populate([
+      {path: "profile"},
+      {path: "comments", populate: {path: "profile"}},
+    ])
     .then(cocktails => {
         res.json(cocktails)
     })
@@ -103,7 +106,10 @@ function comment(req, res){
     cocktail.comments.push(req.body)
     cocktail.save()
     .then(updatedCocktail=>{
-      res.json(cocktail)
+      updatedCocktail.populate({path: "comments", populate: {path: "profile"}})
+      .then((populatedCocktail) => {
+        res.json(populatedCocktail)
+      })
     })
   })
   .catch(err => {
