@@ -62,9 +62,38 @@ function show(req, res){
 }
 
 function update(req, res){
-    Cocktail.findByIdAndUpdate(req.params.id, req.body, {new: true})
-    .then(cocktail => res.json(cocktail))
-    .catch(err => res.json(err))
+  req.body.profile = req.user.profile
+  if (req.body.photo === 'undefined' || !req.files['image']) {
+    delete req.body['image']
+    Cocktail.create(req.body)
+    .then(cocktail => {
+      cocktail.populate('profile')
+      .then(populatedCocktail => {
+        res.status(201).json(populatedCocktail)
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json(err)
+    })
+} else {
+    const imageFile = req.files.image.path
+    cloudinary.uploader.upload(imageFile, {tags: `${req.body.name}`})
+    .then(image => {
+      req.body.image = image.url
+      Cocktail.findByIdAndUpdate(req.params.id, req.body, {new: true})
+      .then(Cocktail => {
+        Cocktail.populate('profile')
+        .then(populatedCocktail => {
+          res.status(201).json(populatedCocktail)
+        })
+      })
+      .catch(err => {
+        console.log(err)
+        res.status(500).json(err)
+      })
+    })
+  }
 }
 
 function comment(req, res){
