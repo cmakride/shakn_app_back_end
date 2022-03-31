@@ -1,4 +1,5 @@
 import { Profile } from '../models/profile.js'
+import {v2 as cloudinary} from 'cloudinary'
 
 function index(req, res) {
   Profile.find({})
@@ -19,12 +20,46 @@ function show(req, res) {
 
 function updateProfile(req, res) {
   console.log("REQ.BODY", req.body)
-  Profile.findByIdAndUpdate(req.user.profile, req.body)
+  if (req.body.photo === 'undefined' || !req.files['photo']) {
+    delete req.body['photo']
+  Profile.findByIdAndUpdate(req.user.profile, req.body )
   .then(profile => {
-    res.json(profile)
+    profile.populate('photo')
+    .then(populatedProfile => {
+      res.status(201).json(populatedProfile)
+    })
   })
-  .catch(err => res.json(err))
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+} else {
+  const imageFile = req.files.photo.path
+  cloudinary.uploader.upload(imageFile)
+  .then(image => {
+    req.body.photo = image.url
+    console.log(req.body)
+    Profile.findByIdAndUpdate(req.user.profile, req.body, {new: true})
+    .then(profile => {
+      
+        res.status(201).json(profile)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json(err)
+    })
+  })
 }
+}
+
+// function updateProfile(req, res) {
+//   console.log("REQ.BODY", req.body)
+//   Profile.findByIdAndUpdate(req.user.profile, req.body)
+//   .then(profile => {
+//     res.json(profile)
+//   })
+//   .catch(err => res.json(err))
+// }
 
 //!add cocktail to collection for this profile
 function addCocktail(req, res) {
