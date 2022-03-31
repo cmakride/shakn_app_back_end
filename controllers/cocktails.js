@@ -83,11 +83,28 @@ function comment(req, res){
   })
 }
 
+function addRating(req, res){
+  console.log(req.body, "REQBODY")
+  Cocktail.findById(req.params.id)
+  .then(cocktail => {
+    cocktail.reviews.push(req.body)
+    cocktail.save()
+    .then(updatedCocktail=>{
+      res.json(cocktail)
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
+}
+
 export {
   comment,
     index,
     create,
     deleteCocktail as delete,
     show,
-    update
+    update,
+    addRating
 }
