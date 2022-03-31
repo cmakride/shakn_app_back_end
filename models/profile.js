@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const profileSchema = new mongoose.Schema({
   email: {type: String, required: true, lowercase: true, unique: true},
   name: {type: String},
-  avatar: {type: String},
+  photo: {type: String, default: "Image URL"},
   bio: {type: String},
   bar: {type: String},
   city: {type: String},
