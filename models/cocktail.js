@@ -23,9 +23,9 @@ const cocktailSchema = new Schema({
 
   profile: { type: Schema.Types.ObjectId, ref: 'Profile', default: null,},
 
-review: [reviewsSchema],
+reviews: [reviewsSchema],
 
-comment: [commentsSchema]
+comments: [commentsSchema]
 
 },{
   timestamps: true
