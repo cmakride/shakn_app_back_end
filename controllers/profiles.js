@@ -12,7 +12,7 @@ function index(req, res) {
 function show(req, res) {
   Profile.findById(req.params.id)
     .then(profile => {
-      console.log(profile)
+    
       res.json(profile)
     })
     .catch(err => res.json(err))
@@ -52,19 +52,9 @@ function updateProfile(req, res) {
 }
 }
 
-// function updateProfile(req, res) {
-//   console.log("REQ.BODY", req.body)
-//   Profile.findByIdAndUpdate(req.user.profile, req.body)
-//   .then(profile => {
-//     res.json(profile)
-//   })
-//   .catch(err => res.json(err))
-// }
-
 //!add cocktail to collection for this profile
 function addCocktail(req, res) {
   const cocktailId = req.body._id
-  console.log(cocktailId)
   Profile.findById(req.user.profile)
     .then(profile => {
       const tempArray = profile.favoriteCocktails
