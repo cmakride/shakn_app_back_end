@@ -2,11 +2,11 @@ import { Cocktail } from "../models/cocktail.js";
 import { v2 as cloudinary } from 'cloudinary'
 
 
-function index (req, res) {
-    Cocktail.find({}).populate([
-      {path: "profile"},
-      {path: "comments", populate: {path: "profile"}},
-    ])
+function index(req, res) {
+  Cocktail.find({}).populate([
+    { path: "profile" },
+    { path: "comments", populate: { path: "profile" } },
+  ])
 
     .then(cocktails => {
       res.json(cocktails)
@@ -67,13 +67,13 @@ function show(req, res) {
 }
 
 function update(req, res) {
-  console.log("REQBODY",req.body)
-  console.log("FILE PATH",req.files)
+  console.log("REQBODY", req.body)
+  console.log("FILE PATH", req.files)
   console.log("REQ PARAMS ID", req.params.id)
 
   if (req.body.photo === 'undefined' || !req.files['image']) {
     delete req.body['image']
-    console.log("REQBODY",req.body)
+    console.log("REQBODY", req.body)
     Cocktail.findByIdAndUpdate(req.params.id, req.body, { new: true })
       .then(cocktail => {
         console.log("NO IMAGE REQ.BODY == ", req.body)
@@ -93,38 +93,39 @@ function update(req, res) {
       .then(image => {
         console.log(image)
         req.body.image = image.url
-       Cocktail.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        Cocktail.findByIdAndUpdate(req.params.id, req.body, { new: true })
           .then(cocktail => {
-            
-                res.status(201).json(cocktail)
-            
+
+            res.status(201).json(cocktail)
+
           })
           .catch(err => {
             console.log(err)
             res.status(500).json(err)
           })
       })
-    }
+  }
 
 }
 
 function comment(req, res) {
-  
   Cocktail.findById(req.params.id)
-  .then(cocktail => {
-    cocktail.comments.push(req.body)
-    cocktail.save()
-    .then(updatedCocktail=>{
-      updatedCocktail.populate({path: "comments", populate: {path: "profile"}})
-      .then((populatedCocktail) => {
-        res.json(populatedCocktail)
-      })
+    .then(cocktail => {
+      cocktail.comments.push(req.body)
+      cocktail.save()
+        .then(updatedCocktail => {
+          updatedCocktail.populate({ path: "comments", populate: { path: "profile" } })
+            .then((populatedCocktail) => {
+              res.json(populatedCocktail)
+            })
+
+        })
 
     })
 }
 
 function addRating(req, res) {
-  
+
   Cocktail.findById(req.params.id)
     .then(cocktail => {
       cocktail.reviews.push(req.body)
