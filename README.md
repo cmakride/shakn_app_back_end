@@ -1,69 +1,37 @@
-# Decoupled MERN Stack with JWT Auth Template - Back End
+# Shakn 🍸
 
-This is the back end of a decoupled MERN Stack app that includes JWT Authentication.
+Welcome to Shakn! A mobile cocktail sharing app created by [Jaeyoung Choi](https://github.com/choijyoung), [Amanda Karczewski](https://github.com/ajkarczewski), and [Christopher Makrides](https://github.com/cmakride). Shakn is a place where bartenders and mixologosts can catologue their cocktail recipes and share them with other professionals. You can start exploring our site [here](https://shakn-a.netlify.app/).
 
-When combined with the front end found [here](https://github.com/SEI-Remote/decoupled-mern-jwt-auth-template-front-end), you'll have all you need to build a full stack MERN app!
+## How it started... 📝
+Check out our Trello board and planning materials [here](https://trello.com/b/L6dbiTqe/cocktail-app-p3)
 
-Use this to go build things! 🚀
+## How it's going 💻
+![Imgur](https://imgur.com/e4HmCwI.png)
+![Imgur](https://imgur.com/R8qi6Sy.png)
 
-## To Use This Template
+## Technologies Used 🛠
 
-**Replace `<name-of-your-app-here>` in the commands below with the name of your app!**
+we used cloudinary for image upload functionality
 
-```bash
-git clone https://github.com/SEI-Remote/decoupled-mern-jwt-auth-template-back-end <name-of-your-app-here>-back-end
-cd <name-of-your-app-here>-back-end
-```
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white)
+![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
+![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-Once you are in the project directory:
 
-```bash
-rm -rf .git
-```
+## Credits 🖤
 
-Here's what your command line output should like after this step (note that the indicator that we are in a git repository is gone!)
 
-<img src="https://i.imgur.com/L47kNOZ.png" alt="The command line before and after running the rm -rf .git command. Before git:(main) is visible indiating that the directory contains a git repository, after the command it is not.">
+## Icebox Items 🧊 
 
-Re-initialize a git repository:
-
-```bash
-git init
-```
-
-Use the GitHub CLI to create a new project repository on GitHub:
-
-```bash
-gh repo create <name-of-your-app-here>-back-end
-```
-
-Run npm i to fetch the template's dependencies:
-
-```bash
-npm i
-```
-
-touch a .env file:
-
-```bash
-touch .env
-```
-
-Fill it with the following:
-
-```
-DATABASE_URL=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-SECRET=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-```
-
-Replace the `DATABASE_URL` and `SECRET` with values that you provide.
-
-> 🚨 Place secrets in this `.env` file. The contents of this file WILL NOT be exposed to site visitors.
-
-Delete this README.md, then make an initial commit:
-
-```bash
-git add .
-git commit -m "initial commit"
-git push -u origin main
-```
+- Implement search functionality
+- Use an email verification API
+- ~~deploy using netify instead heroku~~
+- Load Comments button option in cocktail details
+- make uploading picture required
+- ~~can see cocktail list without being logged in~~
